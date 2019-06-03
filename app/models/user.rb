@@ -5,5 +5,21 @@ class User < ApplicationRecord
   has_many :attractions, through: :rides
 
   validates :name,
-    presence: true
+    presence: true,
+    uniqueness: true
+
+  def mood
+    # if the user is more nauseous than happy
+    mood = "okay"
+    if happiness > nausea
+      mood = "happy"
+    elsif nausea > happiness
+      mood = "sad"
+    end
+    mood
+  end
+
+  def user_type
+    self.admin ? "ADMIN" : "USER"
+  end
 end

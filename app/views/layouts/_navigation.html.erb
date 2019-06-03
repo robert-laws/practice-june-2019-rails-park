@@ -6,10 +6,34 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-  
-        <li class="nav-item">
-          <%= link_to "Register", new_user_path, class: "nav-link" %>
-        </li>      
+        <% if logged_in? %>
+          <li class="nav-item">
+            <%= link_to "Log Out", logout_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "User Info", user_path(session[:user_id]), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "See attractions", attractions_path, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign Up", new_user_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign In", signin_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <% if logged_in? %>
+          <h6 class="text-white mr-3">mood <span class="badge badge-primary"><%= current_user.mood %></span></h6> 
+          <h6 class="text-white mr-3">happiness <span class="badge badge-primary"><%= current_user.happiness %></span></h6> 
+          <h6 class="text-white mr-3">nausea <span class="badge badge-primary"><%= current_user.nausea %></span></h6> 
+          <h6 class="text-white mr-3">height <span class="badge badge-primary"><%= current_user.height %></span></h6> 
+          <h6 class="text-white mr-5">tickets <span class="badge badge-primary"><%= current_user.tickets %></span></h6>        
+          <h6 class="text-white"><span class="badge badge-info"><%= current_user.user_type %></span></%=> 
+        <% end %>
       </ul>
     </div>
   </div>

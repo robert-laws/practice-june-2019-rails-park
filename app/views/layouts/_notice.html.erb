@@ -1,0 +1,15 @@
+<% if !flash[:notice].blank? %>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col">
+        <% flash[:notice].each do |notice| %>
+          <p>
+            <strong>
+              <%= notice %>
+            </strong>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
