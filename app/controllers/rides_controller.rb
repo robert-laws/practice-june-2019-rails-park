@@ -1,6 +1,4 @@
 class RidesController < ApplicationController
-  include RidesHelper
-
   def create
     @ride = Ride.new(ride_params)
     @user = User.find(params[:ride][:user_id])
@@ -24,19 +22,19 @@ class RidesController < ApplicationController
 
     flash[:notice] = []
 
-    if enough_tickets?(user_tickets, attraction_tickets)
+    if helpers.enough_tickets?(user_tickets, attraction_tickets)
       # do nothing
     else
       flash[:notice] << "You do not have enough tickets to ride the #{@attraction.name}"
     end
 
-    if tall_enough?(user_height, attraction_min_height)
+    if helpers.tall_enough?(user_height, attraction_min_height)
       # do nothing
     else
       flash[:notice] << "You are not tall enough to ride the #{@attraction.name}"
     end
 
-    if enough_tickets?(user_tickets, attraction_tickets) && tall_enough?(user_height, attraction_min_height) && @ride.save
+    if helpers.enough_tickets?(user_tickets, attraction_tickets) && helpers.tall_enough?(user_height, attraction_min_height) && @ride.save
 
       updated_user_tickets = (user_tickets.to_i - attraction_tickets.to_i)
       updated_user_happiness = (user_happiness.to_i + attraction_happiness_rating.to_i)
