@@ -6,7 +6,12 @@ class User < ApplicationRecord
 
   validates :name,
     presence: true,
-    uniqueness: true
+    uniqueness: true, 
+    on: :create
+
+  validates :password,
+    presence: true,
+    on: :create
 
   def mood
     # if the user is more nauseous than happy

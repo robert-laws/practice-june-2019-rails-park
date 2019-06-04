@@ -2,13 +2,7 @@
   <div class="container">
     <div class="row mt-4">
       <div class="col">
-        <% flash[:notice].each do |notice| %>
-          <p>
-            <strong>
-              <%= notice %>
-            </strong>
-          </p>
-        <% end %>
+        <%= flash[:notice] %>
       </div>
     </div>
   </div>
